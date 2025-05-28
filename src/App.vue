@@ -1,15 +1,21 @@
 <template>
 
-	<h1>{{ mainHeader }}</h1>
+	
 
-	<table>
-		<tr v-for="(task,index) in tasks">
+	<table class="table">
+		<tr>
+			<td colspan="2"><h1 class="head">{{ mainHeader }}</h1></td>
+		</tr>
+		<tr v-for="(task, index) in tasks">
 			<td>{{ task.text }}</td>
 			<td><button @click="deleteTask(index)"> удалить </button> </td>
 		</tr>
 		<tr>
-			<td><input type="text" v-model="textTask" placeholder="задача" @keyup.enter="clickButton('mainButton')"></td>
-			<td><button id="mainButton" v-show="textTask != ''" @click="addToArray(), clearInput()">Добавить</button></td>
+			<td><input type="text" v-model="textTask" placeholder="задача"
+					@keyup.enter="clickButton('mainButton', textTask)">
+			</td>
+			<td><button id="mainButton" v-show="textTask != ''" @click="addToArray(), clearInput()">Добавить</button>
+			</td>
 		</tr>
 	</table>
 
@@ -38,8 +44,8 @@ export default {
 		deleteTask(index) {
 			this.tasks.splice(index, 1)
 		},
-		clickButton(id){
-			document.getElementById(id).click()
+		clickButton(id, text) {
+			if (text != '') { document.getElementById(id).click() }
 		}
 	}
 }
@@ -50,4 +56,16 @@ h1 {
 	color: rgb(49, 166, 63);
 	font-weight: lighter;
 }
+
+.head {
+	text-align: center;
+}
+.table {
+	margin:auto;
+	
+}
+button {
+	width:100px;
+}
+
 </style>
